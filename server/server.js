@@ -1,7 +1,6 @@
 const io = require("socket.io")(5000);
-const mongo = require("mongodb");
 
-console.log("server");
+console.log("backend started");
 
 io.on("connection", (socket) => {
 	const id = socket.handshake.query.id;

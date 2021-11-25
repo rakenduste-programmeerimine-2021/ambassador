@@ -41,9 +41,7 @@ export default function OpenConversation() {
 					<InputGroup>
 						<Form.Control as="textarea" required value={text} onChange={(e) => setText(e.target.value)} />
 						<InputGroup.Append>
-							<Button type="submit" variant="warning">
-								Send
-							</Button>
+							<button type="submit">Send</button>
 						</InputGroup.Append>
 					</InputGroup>
 				</Form.Group>
