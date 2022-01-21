@@ -1,44 +1,53 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const { isEmail } = require('validator');
+//Require mongoose package
+const mongoose = require("mongoose");
+const passportMongoose = require("passport-local-mongoose");
+
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, 'Please enter a name']
-    },
-    email: {
-        type: String,
-        required: [true, 'Please enter a email'],
-        unique: true,
-        lowercase: true,
-        validate: [isEmail, 'Please enter a valid email address']
-    },
-    password: {
-        type: String,
-        required: [true, 'Please enter a password'],
-        minlength: [6, 'The password should be at least 6 characters long']
-    },
-})
-userSchema.pre('save', async function (next) {
-    const salt = await bcrypt.genSalt();
-    this.password = await bcrypt.hash(this.password, salt);
+	username: {
+		type: String,
+		required: true,
+		unique: true,
+	},
+	name: {
+		type: String,
+		required: true,
+	},
+	password: {
+		type: String,
+		required: true,
+	},
+	email: {
+		type: String,
+		required: true,
+		unique: true,
+	},
+	avatarColor: {
+		type: String,
+		required: false,
+		default: "#000000",
+	},
+	address: {
+		type: String,
+		required: true,
+	},
+	contacts: [
+		{
+			user: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "User",
+			},
+			username: String,
+			nickname: String,
+		},
+	],
+	//get the date of user creation
+	created: {
+		type: Date,
+		default: Date.now(),
+	},
+});
 
-    next()
-})
+//authenticate
+userSchema.plugin(passportMongoose);
 
-userSchema.statics.login = async function (email, password){
-    const user = await this.findOne({email});
-    if(user){
-        const isAuthenticated = await bcrypt.compare(password,user.password);
-        if(isAuthenticated){
-            return user;
-        }else{
-            throw Error('Incorrect password');
-        }
-    }else{
-        throw Error('Incorrect email');
-    }
-}
-
-const User = mongoose.model('user', userSchema);
-module.exports = User;
+module.exports = mongoose.model("User", userSchema);
