@@ -1,0 +1,68 @@
+.input-field-label {
+	position: absolute;
+	top: 50%;
+	transform: translate(0%, -50%);
+	left: 24px;
+	color: #8b87a2;
+	transition: all ease-out 0.15s;
+	font-weight: 700;
+}
+.input-field-label-active {
+	position: absolute;
+	transform: translate(0%, -50%);
+	left: 24px;
+	color: #8b87a2;
+	font-weight: 700;
+	font-size: 0.9em;
+	top: 35%;
+}
+.input-field {
+	position: relative;
+	background: #efeef2;
+	border-radius: 8px;
+	width: 100%;
+	box-sizing: border-box;
+	border: none;
+	font-size: 1em;
+	font-weight: 700;
+}
+.hide-text-input-field {
+	background: none;
+	border: none;
+	width: 100%;
+	padding: 30px 24px 16px 24px;
+	box-sizing: border-box;
+	font-weight: 700;
+	outline: none;
+}
+.hide-input-field:focus ~ .input-field-label {
+	font-size: 0.8em;
+	font-weight: 700;
+	font-size: 0.9em;
+	top: 35%;
+}
+
+.link-text a {
+	text-decoration: none;
+	color: #313131;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+.file-input {
+	height: 62px;
+	cursor: pointer;
+}
+
+.file-type-lable {
+	display: inline-block;
+	padding: 18px 72% 18px 0px;
+	cursor: pointer;
+}
+
+.settings-wrap {
+	position: relative;
+	height: 170px;
+}
